@@ -3,7 +3,7 @@ import requests
 from requests.exceptions import RequestException
 import re
 from multiprocessing import Pool
-
+import os
 
 def get_one_page(url):
     # 注意这个headers,单纯写user-agent是不可以的,操蛋的反爬虫机制
@@ -51,7 +51,7 @@ def main(offset):
     html = get_one_page(url)
     parse_one_page(html)
     for item in parse_one_page(html):
-        print(item)
+        # print(item)
         write_to_file(item)
     # print(html)
 
@@ -61,3 +61,5 @@ if __name__ == '__main__':
     #     main(i * 10)
     pool = Pool()
     pool.map(main, [i * 10 for i in range(10)])
+
+
